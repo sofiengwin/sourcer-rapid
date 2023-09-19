@@ -68,7 +68,6 @@ type Fixture struct {
 func main() {
 	ids := fixtures()
 	for _, fixtureId := range ids {
-		// fmt.Printf("Hello World! %v\n", url)
 		body := client(http.MethodGet, fmt.Sprintf("/predictions?fixture=%d", fixtureId))
 
 		iresponse := IResponse{}
