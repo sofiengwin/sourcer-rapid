@@ -84,7 +84,7 @@ func main() {
 }
 
 func fixtures() []int {
-	body := client(http.MethodGet, "/fixtures?date=2023-09-02&league=39&season=2023")
+	body := client(http.MethodGet, "/fixtures?date=2023-09-20&league=2&season=2023")
 
 	response := Fixture{}
 	if err := json.Unmarshal(body, &response); err != nil {
