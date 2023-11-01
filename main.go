@@ -15,7 +15,7 @@ func HandleRequest(ctx context.Context, event *MyEvent) (*string, error) {
 	if event == nil {
 		return nil, fmt.Errorf("received nil event")
 	}
-	message := fmt.Sprintf("Hello %s!", event.Name)
+	message := fmt.Sprintf("Hello World %s!", event.Name)
 	return &message, nil
 }
 
