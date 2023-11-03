@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 
-	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/sofiengwin/sourcer/supabase"
 )
 
 type MyEvent struct {
@@ -15,10 +16,13 @@ func HandleRequest(ctx context.Context, event *MyEvent) (*string, error) {
 	if event == nil {
 		return nil, fmt.Errorf("received nil event")
 	}
-	message := fmt.Sprintf("Hello World %s!", event.Name)
+	foo := os.Getenv("FOO")
+	bar := os.Getenv("BAR")
+	message := fmt.Sprintf("Hello World %s! fod: %s bar: %s", event.Name, foo, bar)
 	return &message, nil
 }
 
 func main() {
-	lambda.Start(HandleRequest)
+	supabase.Connect()
+	// lambda.Start(HandleRequest)
 }
