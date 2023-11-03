@@ -1,4 +1,4 @@
-package data
+package football
 
 import (
 	"encoding/json"
@@ -67,7 +67,7 @@ type Fixture struct {
 	}
 }
 
-func main() {
+func GetFixture() {
 	ids := fixtures()
 	fmt.Printf("%v", ids)
 
@@ -88,7 +88,7 @@ func main() {
 }
 
 func fixtures() []int {
-	body := client(http.MethodGet, "/fixtures?date=2023-09-2&league=39&season=2023")
+	body := client(http.MethodGet, "/fixtures?date=2023-11-04&league=39&season=2023")
 
 	response := Fixture{}
 	if err := json.Unmarshal(body, &response); err != nil {
@@ -96,7 +96,6 @@ func fixtures() []int {
 		os.Exit(1)
 	}
 
-	// fmt.Printf("%s", body)
 	fmt.Println(response.Response)
 	fixtureIds := []int{}
 	for _, fixture := range response.Response {
@@ -138,9 +137,7 @@ func (ir IResponse) String() string {
 
 func client(http_method string, endpoint string) []byte {
 	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%v%v", Base, endpoint), nil)
-
-	req.Header.Set("X-RapidAPI-Key", "VXn6iAlAwImshiy4k4mBsAZKwzM4p1Aq5iUjsnDLHpy8F0jlSf")
-	// req.Header.Set("X-RapidAPI-Key", "7850c93c7amshce44d177e4d57e3p18c434jsn758783b07818")
+	req.Header.Set("X-RapidAPI-Key", os.Getenv("X_RapidAPI_KEY"))
 
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error creating request: %v\n", err)

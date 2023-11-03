@@ -3,13 +3,24 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
-	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/sofiengwin/sourcer/football"
+
+	"github.com/joho/godotenv"
 )
 
 type MyEvent struct {
 	Name string `json:"name"`
+}
+
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Printf("%s", err)
+		log.Fatal("Error loading .env file")
+	}
 }
 
 func HandleRequest(ctx context.Context, event *MyEvent) (*string, error) {
@@ -24,5 +35,6 @@ func HandleRequest(ctx context.Context, event *MyEvent) (*string, error) {
 
 func main() {
 	// supabase.Connect()
-	lambda.Start(HandleRequest)
+	football.GetFixture()
+	// lambda.Start(HandleRequest)
 }
