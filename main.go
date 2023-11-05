@@ -6,9 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/sofiengwin/sourcer/football"
-
 	"github.com/joho/godotenv"
+	"github.com/sofiengwin/sourcer/supabase"
 )
 
 type MyEvent struct {
@@ -34,7 +33,7 @@ func HandleRequest(ctx context.Context, event *MyEvent) (*string, error) {
 }
 
 func main() {
-	// supabase.Connect()
-	football.GetFixture()
+	supabase.Connect()
+	// football.GetFixture()
 	// lambda.Start(HandleRequest)
 }
